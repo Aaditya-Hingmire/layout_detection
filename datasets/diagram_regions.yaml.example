@@ -1,0 +1,7 @@
+# One-class detection dataset. Keep pages from each document/student in one split.
+path: ./diagram_dataset
+train: images/train
+val: images/val
+test: images/test
+names:
+  0: diagram_region

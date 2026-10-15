@@ -1,0 +1,8 @@
+{
+  "unit": "document_or_student",
+  "splits": {
+    "train": ["document-001"],
+    "val": ["document-002"],
+    "test": ["document-003"]
+  }
+}

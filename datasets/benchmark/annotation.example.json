@@ -1,0 +1,20 @@
+{
+  "document_id": "sheet-001",
+  "student_id": "student-042",
+  "source_type": "real_handwritten",
+  "pages": [
+    {
+      "page_id": "page-1",
+      "image": "images/sheet-001-page-1.png",
+      "width_px": 1654,
+      "height_px": 2339,
+      "tags": ["ruled_background", "subquestion", "small_diagram"],
+      "regions": [
+        {"id": "text-1", "class": "handwritten_text", "bbox": {"x": 110, "y": 240, "width": 950, "height": 220}},
+        {"id": "diagram-1", "class": "diagram_region", "bbox": {"x": 190, "y": 520, "width": 430, "height": 390}}
+      ],
+      "anchors": [{"id": "anchor-1", "text": "Q. 1", "bbox": {"x": 100, "y": 160, "width": 130, "height": 45}}],
+      "associations": [{"anchor_id": "anchor-1", "member_ids": ["text-1", "diagram-1"]}]
+    }
+  ]
+}
