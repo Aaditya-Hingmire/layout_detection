@@ -28,3 +28,7 @@ build/
 Thumbs.db
 
 *.log
+
+# Local PDF inputs and generated analysis artifacts
+input.pdf
+artifacts-*/

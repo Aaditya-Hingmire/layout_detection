@@ -6,8 +6,8 @@ import logging
 from pathlib import Path
 
 import cv2
-import fitz
 import numpy as np
+import pymupdf
 
 from .config import LayoutConfig
 from .errors import InputValidationError, RenderingError
@@ -24,8 +24,8 @@ def render_pdf(pdf_path: str | Path, output_dir: str | Path, config: LayoutConfi
     destination = Path(output_dir).expanduser().resolve()
     _validate_source(source)
     try:
-        document = fitz.open(source)
-    except (fitz.FileDataError, RuntimeError) as error:
+        document = pymupdf.open(source)
+    except (pymupdf.FileDataError, RuntimeError) as error:
         raise InputValidationError("input is not a readable PDF") from error
     try:
         if document.is_encrypted:
@@ -40,7 +40,7 @@ def render_pdf(pdf_path: str | Path, output_dir: str | Path, config: LayoutConfi
         pages: list[PageResult] = []
         for index in range(document.page_count):
             page = document.load_page(index)
-            pixmap = page.get_pixmap(dpi=config.rendering.dpi, colorspace=fitz.csRGB, alpha=False)
+            pixmap = page.get_pixmap(dpi=config.rendering.dpi, colorspace=pymupdf.csRGB, alpha=False)
             image = _pixmap_to_bgr(pixmap)
             _enforce_pixel_limit(image, config.rendering.max_pixels_per_page)
             page_id = f"page-{index + 1}"
@@ -77,7 +77,7 @@ def _validate_source(source: Path) -> None:
             raise InputValidationError("input does not have a PDF header")
 
 
-def _pixmap_to_bgr(pixmap: fitz.Pixmap) -> np.ndarray:
+def _pixmap_to_bgr(pixmap: pymupdf.Pixmap) -> np.ndarray:
     rgb = np.frombuffer(pixmap.samples, dtype=np.uint8).reshape(pixmap.height, pixmap.width, pixmap.n)
     if pixmap.n != 3:
         raise RenderingError(f"unsupported rendered channel count: {pixmap.n}")

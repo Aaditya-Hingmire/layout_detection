@@ -16,7 +16,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<9"]
-paddle = ["paddlepaddle>=3.0", "paddleocr>=3.0"]
+paddle = ["paddlepaddle>=3.0", "paddleocr>=3.0", "paddlex[ocr]>=3.0,<4"]
 yolo = ["ultralytics>=8.3"]
 
 [project.scripts]

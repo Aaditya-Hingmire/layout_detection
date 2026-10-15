@@ -31,7 +31,7 @@ def estimate_skew_degrees(gray: NDArray[np.uint8]) -> float | None:
     if lines is None:
         return None
     angles: list[float] = []
-    for x1, y1, x2, y2 in lines[:, 0]:
+    for x1, y1, x2, y2 in lines.reshape(-1, 4):
         angle = float(np.degrees(np.arctan2(y2 - y1, x2 - x1)))
         if abs(angle) <= 15:
             angles.append(angle)
